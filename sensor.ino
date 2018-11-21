@@ -1,11 +1,11 @@
   
   
   
-/**************************************************** 
- *SENSORE DI DISTANZA
+/******************************************************* 
+ *SENSORE DI DISTANZA hc-sr04
  *la funzione dist() restituisce un valore booleano TRUE 
  *se rileva un ostacolo a distanza maggiore di 30cm  
- ****************************************************/
+ ******************************************************/
   
   int dist(){
 
@@ -32,7 +32,7 @@
            Serial.println (" ");
          }
        
-//////evitiamo una divisione per zero, sostituendo lo zero con 1000
+//evitiamo una divisione per zero, sostituendo lo zero con 1000
  if (duration == 0)
    duration == 1000;
    

@@ -1,7 +1,7 @@
 /***********************************************
+ Arduino Pin  APDS-9960 Board  Function
 IMPORTANT: The APDS-9960 can only accept 3.3V!
  
- Arduino Pin  APDS-9960 Board  Function
  
  
  3.3V         VCC              Power
@@ -9,6 +9,7 @@ IMPORTANT: The APDS-9960 can only accept 3.3V!
  A4           SDA              I2C Data
  A5           SCL              I2C Clock
  2            INT              Interrupt
+
 
 ************************************************/
 
@@ -29,7 +30,9 @@ int tempoGiro = 4000;
 int mezzoGiro = 2000;
 int giroLato = 1000;
 
-/*istruzioni legate al sensore di distanza*/
+/***********************************************
+istruzioni legate al sensore di distanza hc-sr04
+***********************************************/
 
 #define MIN_DIST 20
 int cmconv = 59; 
