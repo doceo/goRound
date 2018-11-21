@@ -9,22 +9,21 @@
   
   int dist(){
 
-    int trovato = false;                                                     // imposta la variabile che restituisce a false
-  
-    digitalWrite (TRIG, HIGH);                                        // attraverso il trigger inizia a emettere onde
-    delayMicroseconds(10);                                                   // per dieci secondi
-    digitalWrite(TRIG,LOW);                                           // e si ferma
+    int trovato = false;       
+    digitalWrite (TRIG, HIGH);     
+    delayMicroseconds(10);   
+    digitalWrite(TRIG,LOW);        
 
-  long duration =pulseIn(ECHO, HIGH);                                  //attraverso la funzione pulseIn acquisiamo il segnale tramite il sensore
+  long duration =pulseIn(ECHO, HIGH); 
 
-  long int distanza = 0.036 * duration /2;                                 //calcoliamo la distanza
+  long int distanza = 0.036 * duration /2; 
 
-  Serial.print(" durata: ");                                               //stampiamo sul monitor seriale la durata del segnale e la distanza ottenuta
+  Serial.print(" durata: ");    
   Serial.println(duration);
   Serial.print(" distanza: ");
 
   if (duration >380000) { 
-          Serial.println("fuori portata");                                 //segnaliamo se la distanza è fuori dalla portata dello strumento
+          Serial.println("fuori portata");  
   
   }else { 
            Serial.print(distanza); 
@@ -32,11 +31,10 @@
            Serial.println (" ");
          }
        
-//evitiamo una divisione per zero, sostituendo lo zero con 1000
  if (duration == 0)
    duration == 1000;
    
-   long int rval = microsecondsToCentimeters(duration);                    //calcoliamo la distanza in centimetri
+   long int rval = microsecondsToCentimeters(duration);
  
  
  return rval;
@@ -71,4 +69,27 @@ void sentoRumore(){
 
   }
 }
+
+
+/**************************************************** 
+ *SENSORE APDS-9960
+ *se il sensore percepisce un movimento restituisce in 
+ *output la direzione da prendere
+ ****************************************************/
   
+char direzione(uint8_t gesture){
+
+    char dir;
+    if(gesture == APDS9960_UP){
+      dir= 'd';
+    }
+    else if(gesture == APDS9960_LEFT){
+      dir= 's';
+    }
+    else if(gesture == APDS9960_RIGHT){
+      dir= 'd';
+    } else dir = '0';
+
+
+  return dir;
+}

@@ -66,6 +66,11 @@ void loop() {
   
 sentoRumore();
 
+uint8_t gesture = apds.readGesture();
+
+char dir;
+if (gesture) dir = direzione(gesture);
+
 /************************************************************
 * deve girare a destra o sinistra, andare avanti fino 
 * all'ostacolo e poi tornare indietro
