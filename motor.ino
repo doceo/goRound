@@ -1,6 +1,48 @@
 
-//script modificato a partire da un algoritmo pubblicato su https://www.lombardoandrea.com/l298n-motore-dc-arduino/
+/*************************************************************
+ * 
+ * le seguenti funzioni servono a semplificare la lettura
+ * della funzione di loop
+ * 
+ ************************************************************/
 
+void avantiIndietro(){
+  
+      inizio = millis();
+      avanti():
+      
+      if (dist()<20){
+        
+        fermo();
+        durata = millis() - inizio;           
+      }
+
+ 
+      inizio = millis();
+      indietro();
+
+      delay(durata);
+
+      fermo();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/**************************************************************
+ * 
+ * script modificato a partire da un algoritmo pubblicato 
+ * su https://www.lombardoandrea.com/l298n-motore-dc-arduino/
+ * 
+**************************************************************/
 
 
 //definizione dei pin

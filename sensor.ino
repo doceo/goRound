@@ -81,15 +81,17 @@ char direzione(uint8_t gesture){
 
     char dir;
     if(gesture == APDS9960_UP){
-      dir= 'd';
+      dir= 'a';
     }
     else if(gesture == APDS9960_LEFT){
       dir= 's';
     }
     else if(gesture == APDS9960_RIGHT){
       dir= 'd';
-    } else dir = '0';
-
+    }
+    else if(gesture == APDS9960_DOWN){
+      dir= 'i';
+    }
 
   return dir;
 }

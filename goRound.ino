@@ -1,17 +1,41 @@
 /***********************************************
- Arduino Pin  APDS-9960 Board  Function
-IMPORTANT: The APDS-9960 can only accept 3.3V!
- 
- 
- 
- 3.3V         VCC              Power
- GND          GND              Ground
- A4           SDA              I2C Data
- A5           SCL              I2C Clock
- 2            INT              Interrupt
-
-
-************************************************/
+ * 
+ * di seguito sono riportate le connessioni dei 
+ * sensori ad arduino
+ * 
+ * DOPPIO PONTE L298N
+ * 
+ * MOTOR 1
+ * In1  pin 7
+ * In2  pin 3
+ * 
+ * MOTOR 2 
+ * In3  pin 4
+ * In4  pin 5
+ * 
+ * SENSORE DI DISTANZA hc-sr04 (1)
+ * echo   A3
+ * trigger A2
+ * 
+ * SENSORE DI DISTANZA hc-sr04 (2)
+ * echo   A0
+ * trigger A1
+ * 
+ * SENSORE DI RUMORE
+ * DIGITAL pin 10
+ * 
+ * 
+ * APDS-9960 Board  Function
+ * IMPORTANT: The APDS-9960 can only accept 3.3V!
+ *   
+ *  3.3V         VCC              Power
+ *  GND          GND              Ground
+ *  A4           SDA              I2C Data
+ *  A5           SCL              I2C Clock
+ *  2            INT              Interrupt
+ * 
+ * 
+ *************************************************/
 
 #include "Adafruit_APDS9960.h"
 Adafruit_APDS9960 apds;
@@ -29,10 +53,13 @@ int rumorValue = 0;
 int tempoGiro = 4000;
 int mezzoGiro = 2000;
 int giroLato = 1000;
+unsigned long inizio;
+unsigned long durata;
+unsigned long ritorno;
 
-/***********************************************
-istruzioni legate al sensore di distanza hc-sr04
-***********************************************/
+/***************************************************
+ * istruzioni legate al sensore di distanza hc-sr04
+***************************************************/
 
 #define MIN_DIST 20
 int cmconv = 59; 
@@ -64,17 +91,36 @@ void setup() {
 
 void loop() {
   
-sentoRumore();
+//sentoRumore();
 
 uint8_t gesture = apds.readGesture();
 
 char dir;
-if (gesture) dir = direzione(gesture);
+if (gesture){
+  
+  dir = direzione(gesture);
+  
+  switch (dir) {
+    
+    case 'a':
+      avantiTorna(); 
+      break;
+      
+    case 'd':
+      destraTorna();
+      break;
 
-/************************************************************
-* deve girare a destra o sinistra, andare avanti fino 
-* all'ostacolo e poi tornare indietro
-************************************************************/
+    case 's':
+      sinistraTorna();
+      break;
+
+    case 'i':
+      indietroTorna();
+      break;
+}
+  
+}
+
 
 
 fermo();
