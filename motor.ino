@@ -29,14 +29,6 @@ void avantiIndietro(){
 
 
 
-
-
-
-
-
-
-
-
 /**************************************************************
  * 
  * script modificato a partire da un algoritmo pubblicato 

@@ -13,13 +13,13 @@
  * In3  pin 4
  * In4  pin 5
  * 
- * SENSORE DI DISTANZA hc-sr04 (1)
+ * SENSORE DI DISTANZA hc-sr04 (dietro)
  * echo   A3
  * trigger A2
  * 
- * SENSORE DI DISTANZA hc-sr04 (2)
- * echo   A0
- * trigger A1
+ * SENSORE DI DISTANZA hc-sr04 (avanti)
+ * echo   A1
+ * trigger A0
  * 
  * SENSORE DI RUMORE
  * DIGITAL pin 10
@@ -120,8 +120,6 @@ if (gesture){
 }
   
 }
-
-
 
 fermo();
 }
