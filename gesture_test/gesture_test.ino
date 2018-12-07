@@ -42,16 +42,16 @@ char direzione(uint8_t gesture){
 
     char dir;
     if(gesture == APDS9960_UP){
-      dir= 'a';
+      dir= 'i';
     }
     else if(gesture == APDS9960_LEFT){
-      dir= 's';
-    }
-    else if(gesture == APDS9960_RIGHT){
       dir= 'd';
     }
+    else if(gesture == APDS9960_RIGHT){
+      dir= 's';
+    }
     else if(gesture == APDS9960_DOWN){
-      dir= 'i';
+      dir= 'a';
     }
 
   return dir;
@@ -63,6 +63,9 @@ void loop() {
   //read a gesture from the device
     uint8_t gesture = apds.readGesture();
 
-    Serial.print(direzione(gesture));
+    if(gesture){
+      Serial.print ("rilevato ... ");
+      Serial.println(direzione(gesture));
+    }
     
 }
