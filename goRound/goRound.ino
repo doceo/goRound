@@ -64,18 +64,21 @@ unsigned long ritorno;
 #define MIN_DIST 20
 int cmconv = 59; 
 
-#define TRIG A5
-#define ECHO A4
+#define TRIG_D A5
+#define ECHO_D A4
 
+#define TRIG_A A5
+#define ECHO_A A4
  
 void setup() {
   // put your setup code here, to run once:
   pinMode (ledPin, OUTPUT);
 
 //sensore distanza
-   pinMode(TRIG, OUTPUT);
-   pinMode(ECHO, INPUT);
-
+   pinMode(TRIG_D, OUTPUT);
+   pinMode(ECHO_D, INPUT);
+   pinMode(TRIG_A, OUTPUT);
+   pinMode(ECHO_A, INPUT);
   
   Serial.begin(9600);
   if(!apds.begin()){

@@ -13,9 +13,11 @@ int rumorValue = 0;
 #define MIN_DIST 20
 int cmconv = 59; 
 
-#define TRIG A5
-#define ECHO A4
+#define TRIG_D A5
+#define ECHO_D A4
 
+#define TRIG_A A5
+#define ECHO_A A4
 
 void setup() {
   // put your setup code here, to run once:
@@ -23,8 +25,10 @@ void setup() {
   pinMode (ledPin, OUTPUT);
 
 //sensore distanza
-   pinMode(TRIG, OUTPUT);
-   pinMode(ECHO, INPUT);
+   pinMode(TRIG_D, OUTPUT);
+   pinMode(ECHO_D, INPUT);
+   pinMode(TRIG_A, OUTPUT);
+   pinMode(ECHO_A, INPUT);
     
    Serial.begin(9600);
 }
@@ -32,27 +36,68 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
+avantiIndietro("avanti");
+delay(4000);
+avantiIndietro("indietro");
+delay(5000);
+
+
+
 }
 
 
-void avantiIndietro(){
-  
-      inizio = millis();
-      avanti();
+void avantiIndietro(String dir){
+
+      uint8_t trig;
+      uint8_t echo;
+
       
-      if (dist()<20){
+      if (dir.equals("avanti")){
+            trig = TRIG_A;
+            echo = ECHO_A;
+  
+            inizio = millis();
+            Serial.print("inizio= ");
+            Serial.println(inizio);
+            avanti();
         
-        fermo();
-        durata = millis() - inizio;           
+            if (dist(trig, echo)<20){
+          
+                fermo();
+                durata = millis() - inizio;
+                Serial.print("durata= ");
+                Serial.println(durata);           
+                }
+   
+                inizio = millis();
+                indietro();
+        
+                delay(durata);
+        
+                fermo();
+
+      }else if(dir.equals("indietro") ){
+            trig = TRIG_D;
+            echo = ECHO_D;
+
+           inizio = millis();
+            indietro();
+        
+            if (dist(trig, echo)<20){
+          
+                fermo();
+                durata = millis() - inizio;           
+                }
+  
+   
+                inizio = millis();
+                avanti();
+        
+                delay(durata);
+        
+                fermo();
+        
       }
-
- 
-      inizio = millis();
-      indietro();
-
-      delay(durata);
-
-      fermo();
 
 }
 
@@ -141,37 +186,44 @@ void sinistra(int tempo) {
 }
 
  
-  int dist(){
-
+  int dist(uint8_t TRIG, uint8_t ECHO){
+    
+    Serial.print("trig= ");
+    Serial.println(TRIG);
+    
+    Serial.print("echo= ");
+    Serial.println(ECHO);
+    
+    
     int trovato = false;       
     digitalWrite (TRIG, HIGH);     
     delayMicroseconds(10);   
     digitalWrite(TRIG,LOW);        
 
-  long duration =pulseIn(ECHO, HIGH); 
+    long duration =pulseIn(ECHO, HIGH); 
 
-  long int distanza = 0.036 * duration /2; 
+    long int distanza = 0.036 * duration /2; 
 
-  Serial.print(" durata: ");    
-  Serial.println(duration);
-  Serial.print(" distanza: ");
-
-  if (duration >380000) { 
-          Serial.println("fuori portata");  
+    Serial.print(" durata: ");    
+    Serial.println(duration);
+    Serial.print(" distanza: ");
   
-  }else { 
-           Serial.print(distanza); 
-           Serial.println ("cm");
-           Serial.println (" ");
-         }
-       
- if (duration == 0)
-   duration == 1000;
+    if (duration >380000) { 
+            Serial.println("fuori portata");  
+    
+    }else { 
+             Serial.print(distanza); 
+             Serial.println ("cm");
+             Serial.println (" ");
+           }
+         
+   if (duration == 0)
+     duration == 1000;
+     
+     long int rval = microsecondsToCentimeters(duration);
    
-   long int rval = microsecondsToCentimeters(duration);
- 
- 
- return rval;
+   
+   return rval;
 
 }
 
