@@ -6,14 +6,14 @@ int rumorPin = A0;
 int ledPin = 13;
 int rumorValue = 0;
 
-#define MIN_DIST 20
+int MIN_DIST = 20;
 int cmconv = 59; 
 
-int TRIG_D = A5;
-int ECHO_D = A4;
+int TRIG_D = A2;
+int ECHO_D = A3;
 
-int TRIG_A = A5;
-int ECHO_A = A4;
+int TRIG_A = A0;
+int ECHO_A = A1;
 
 void setup() {
   // put your setup code here, to run once:
@@ -30,10 +30,14 @@ void setup() {
 }
 
 void loop() {
+  
   // put your main code here, to run repeatedly:
-
+Serial.println("sensore avanti");
 avantiIndietro("avanti");
 delay(4000);
+
+Serial.println();
+Serial.println("Senrore indietro");
 avantiIndietro("indietro");
 delay(5000);
 
@@ -91,7 +95,7 @@ void avantiIndietro(String dir){
                 inizio = millis();
                 avanti();
         
-                delay(percorso);
+ //               delay(percorso);
         
                 fermo();
         
