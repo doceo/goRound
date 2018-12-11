@@ -16,11 +16,11 @@ int TRIG_A = A0;
 int ECHO_A = A1;
 
 void setup() {
-  // put your setup code here, to run once:
-  // put your setup code here, to run once:
-  pinMode (ledPin, OUTPUT);
+// put your setup code here, to run once:
+// put your setup code here, to run once:
+   pinMode (ledPin, OUTPUT);
 
-//sensore distanza
+// sensore distanza
    pinMode(TRIG_D, OUTPUT);
    pinMode(ECHO_D, INPUT);
    pinMode(TRIG_A, OUTPUT);
@@ -32,14 +32,17 @@ void setup() {
 void loop() {
   
   // put your main code here, to run repeatedly:
-Serial.println("sensore avanti");
-avantiIndietro("avanti");
-delay(4000);
+Serial.println("Sensore avanti");
+Serial.println(dist(TRIG_D,ECHO_D));
 
-Serial.println();
-Serial.println("Senrore indietro");
-avantiIndietro("indietro");
-delay(5000);
+
+//avantiIndietro("avanti");
+delay(1000);
+
+//Serial.println();
+//Serial.println("Sensore indietro");
+//avantiIndietro("indietro");
+//delay(5000);
 
 
 
@@ -94,9 +97,6 @@ void avantiIndietro(String dir){
    
                 inizio = millis();
                 avanti();
-        
- //               delay(percorso);
-        
                 fermo();
         
       }
@@ -190,12 +190,6 @@ void sinistra(int tempo) {
  
   int dist(int TRIG, int ECHO){
     
-    Serial.print("trig= ");
-    Serial.println(TRIG);
-    
-    Serial.print("echo= ");
-    Serial.println(ECHO);
-    
     
     int trovato = false;       
     digitalWrite (TRIG, HIGH);     
@@ -206,18 +200,18 @@ void sinistra(int tempo) {
 
     long int distanza = 0.036 * duration /2; 
 
-    Serial.print(" durata: ");    
-    Serial.println(duration);
+//    Serial.print(" durata: ");    
+//    Serial.println(duration);
     Serial.print(" distanza: ");
   
-    if (duration >380000) { 
-            Serial.println("fuori portata");  
-    
-    }else { 
-             Serial.print(distanza); 
-             Serial.println ("cm");
-             Serial.println (" ");
-           }
+//    if (duration >380000) { 
+//            Serial.println("fuori portata");  
+//    
+//    }else { 
+//             Serial.print(distanza); 
+//             Serial.println ("cm");
+//             Serial.println (" ");
+//           }
          
    if (duration == 0)
      duration == 1000;
@@ -225,7 +219,7 @@ void sinistra(int tempo) {
      long int rval = microsecondsToCentimeters(duration);
    
    
-   return rval;
+   return distanza;
 
 }
 
